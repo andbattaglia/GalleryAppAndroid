@@ -1,7 +1,7 @@
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation project(':app_usecase')
+    implementation project(':app_data')
 
     implementation deps.kotlin.stdlib
     implementation deps.kotlin.coroutines_core

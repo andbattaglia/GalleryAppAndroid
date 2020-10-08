@@ -3,7 +3,7 @@ package com.battagliandrea.galleryappandroid.di.viewmodel
 import androidx.lifecycle.ViewModel
 import com.abdroid.jrv.core.android.dagger.ViewModelKey
 import com.battagliandrea.galleryappandroid.ui.bookmarks.BookmarksViewModel
-import com.battagliandrea.galleryappandroid.ui.list.ImagesViewModel
+import com.battagliandrea.galleryappandroid.ui.images.ImagesViewModel
 import com.squareup.inject.assisted.dagger2.AssistedModule
 import dagger.Binds
 import dagger.Module

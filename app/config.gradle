@@ -27,14 +27,14 @@ android {
                 applicationIdSuffix = ".devel"
 
                 resValue "string", "app_name", project.APP_NAME
-                buildConfigField "String", "apiBaseUrl", '"https://api.punkapi.com/"'
+                buildConfigField "String", "apiBaseUrl", '"https://www.reddit.com/"'
             }
 
             prod {
                 dimension "env"
 
                 resValue "string", "app_name", project.APP_NAME
-                buildConfigField "String", "apiBaseUrl", '"https://api.punkapi.com/"'
+                buildConfigField "String", "apiBaseUrl", '"https://www.reddit.com/"'
             }
         }
 

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/fragment_images"
-        android:name="com.battagliandrea.galleryappandroid.ui.list.ImagesFragment"
+        android:name="com.battagliandrea.galleryappandroid.ui.images.ImagesFragment"
         tools:layout="@layout/fragment_images">
         <action
             android:id="@+id/action_fragment_images_to_fragment_bookmarks"

@@ -2,7 +2,7 @@ package com.battagliandrea.galleryappandroid.di.module.binding
 
 import com.battagliandrea.galleryappandroid.di.scope.FragmentScope
 import com.battagliandrea.galleryappandroid.ui.bookmarks.BookmarksFragment
-import com.battagliandrea.galleryappandroid.ui.list.ImagesFragment
+import com.battagliandrea.galleryappandroid.ui.images.ImagesFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

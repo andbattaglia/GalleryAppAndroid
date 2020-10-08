@@ -2,7 +2,7 @@ package com.battagliandrea.galleryappandroid.di.module.framework
 
 import android.content.Context
 import com.battagliandrea.galleryappandroid.BuildConfig
-import com.battagliandrea.galleryappandroid.datasource.RedditApiContract
+import com.battagliandrea.galleryappandroid.data.networking.RedditApiContract
 import com.google.gson.Gson
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
@@ -48,7 +48,8 @@ open class RetrofitModule {
 
     @Provides
     @Singleton
-    open fun provideApi(retrofit: Retrofit, context: Context): RedditApiContract = retrofit.create(RedditApiContract::class.java)
+    open fun provideApi(retrofit: Retrofit, context: Context): RedditApiContract = retrofit.create(
+        RedditApiContract::class.java)
 
 
     private fun createRetrofit(gson: Gson,
