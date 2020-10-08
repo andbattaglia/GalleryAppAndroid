@@ -1,0 +1,53 @@
+android {
+
+    buildTypes {
+
+        debug {
+            minifyEnabled false
+            testCoverageEnabled true
+        }
+
+        release {
+            minifyEnabled true
+            shrinkResources false
+
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguardTest-rules.pro'
+        }
+    }
+
+
+    android {
+
+        flavorDimensions "env"
+
+        productFlavors {
+            devel {
+                dimension "env"
+                applicationIdSuffix = ".devel"
+
+                resValue "string", "app_name", project.APP_NAME
+                buildConfigField "String", "apiBaseUrl", '"https://api.punkapi.com/"'
+            }
+
+            prod {
+                dimension "env"
+
+                resValue "string", "app_name", project.APP_NAME
+                buildConfigField "String", "apiBaseUrl", '"https://api.punkapi.com/"'
+            }
+        }
+
+        bundle {
+            density {
+                enableSplit true
+            }
+            abi {
+                enableSplit true
+            }
+            language {
+                enableSplit false
+            }
+        }
+    }
+}

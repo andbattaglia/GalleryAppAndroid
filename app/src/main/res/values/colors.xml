@@ -1,0 +1,22 @@
+<!--?xml version="1.0" encoding="UTF-8"?-->
+<resources>
+
+  <color name="primaryColor">@color/grey900</color>
+  <color name="primaryLightColor">@color/grey900</color>
+  <color name="primaryDarkColor">@color/grey900</color>
+
+  <color name="whiteAlpha87">#DEFFFFFF</color>
+  <color name="whiteAlpha60">#99FFFFFF</color>
+  <color name="whiteAlpha38">#61FFFFFF</color>
+
+  <color name="blackAlpha87">#DE000000</color>
+  <color name="blackAlpha60">#99000000</color>
+  <color name="blackAlpha38">#61000000</color>
+
+  <color name="grey900">#0b1316</color>
+  <color name="grey900Light">#32393c</color>
+  <color name="grey900Dark">#000000</color>
+
+  <color name="orange">#F59F27</color>
+
+</resources>

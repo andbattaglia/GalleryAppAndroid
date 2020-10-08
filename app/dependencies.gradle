@@ -1,0 +1,53 @@
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation project(':app_usecase')
+
+    implementation deps.kotlin.stdlib
+    implementation deps.kotlin.coroutines_core
+    implementation deps.kotlin.coroutines_android
+
+    implementation deps.dagger.runtime
+    implementation deps.dagger.android
+    implementation deps.dagger.android_support
+    compileOnly deps.dagger.injectAnnotation
+    kapt deps.dagger.compiler
+    kapt deps.dagger.processor
+    kapt deps.dagger.injectProcessor
+
+
+    implementation deps.gson.runtime
+    implementation deps.okhttp.runtime
+    implementation deps.okhttp.logging
+    implementation deps.okhttp.mock
+
+    implementation deps.retrofit.coroutine
+    implementation deps.retrofit.gson
+    implementation deps.retrofit.mock
+    implementation (deps.retrofit.runtime) {
+        exclude module: 'okhttp'
+    }
+
+    implementation deps.androidx.appcompat
+    implementation deps.androidx.lifecycleExt
+    implementation deps.androidx.lifecycleViewmodel
+    implementation deps.androidx.lifecycleViewmodelSavedState
+    implementation deps.androidx.constraint
+    implementation deps.androidx.constraint_solver
+    implementation deps.androidx.navigation_fragment
+    implementation deps.androidx.navigation_ui
+
+    implementation deps.support.java_inject
+
+    implementation deps.google.material
+
+    implementation deps.glide.runtime
+    kapt  deps.glide.compiler
+
+    testImplementation deps.test.junit
+    testImplementation deps.test.kotlin
+
+    testImplementation deps.mockito.core
+    testImplementation deps.mockito.inline
+    testImplementation deps.mockito.kotlin
+}

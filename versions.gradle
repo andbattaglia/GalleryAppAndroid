@@ -1,0 +1,131 @@
+ext.deps = [:]
+def versions = [:]
+
+versions.androidGradlePlugin = '4.0.2'
+
+versions.kotlin = '1.3.61'
+versions.coroutines = '1.3.2'
+versions.junit = '4.12'
+
+versions.androidArch = '2.0.0'
+versions.androidX = '1.1.0-beta01'
+versions.androidXConstraintLayout = '2.0.0-beta4'
+versions.androidXTest = '1.1.0'
+versions.androidXNavigation = "2.2.1"
+versions.androidXmultidex = '2.0.0'
+
+versions.material = '1.2.0-alpha06'
+
+versions.supportJavaInject = '1'
+
+versions.dagger = '2.16'
+versions.daggerAssisted = '0.5.1'
+
+versions.retrofit2 = '2.6.0'
+versions.retrofit2Coroutine = '0.9.2'
+versions.okHttp3 = '3.11.0'
+
+versions.gson = '2.8.5'
+
+versions.glide = '4.8.0'
+
+versions.mockito = '2.23.0'
+versions.mockitoKotlin = '2.0.0-RC2'
+
+def build_versions = [:]
+build_versions.min_sdk = 23
+build_versions.target_sdk = 29
+build_versions.build_tools = "29.0.2"
+ext.build_versions = build_versions
+
+def deps = [:]
+deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.androidGradlePlugin"
+
+def kotlin = [:]
+kotlin.stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$versions.kotlin"
+kotlin.plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
+kotlin.coroutines_core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutines"
+kotlin.coroutines_android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutines"
+kotlin.test = "org.jetbrains.kotlin:kotlin-test-junit:$versions.kotlin"
+deps.kotlin = kotlin
+
+def androidx = [:]
+androidx.multidex = "androidx.multidex:multidex:$versions.androidXmultidex"
+
+androidx.appcompat = "androidx.appcompat:appcompat:$versions.androidX"
+androidx.lifecycleExt = "androidx.lifecycle:lifecycle-extensions:$versions.androidArch"
+androidx.lifecycleViewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.androidArch"
+androidx.lifecycleViewmodelSavedState = "androidx.lifecycle:lifecycle-viewmodel-savedstate:1.0.0-rc03"
+androidx.constraint = "androidx.constraintlayout:constraintlayout:$versions.androidXConstraintLayout"
+androidx.constraint_solver = "androidx.constraintlayout:constraintlayout-solver:$versions.androidXConstraintLayout"
+androidx.navigation_fragment =  "androidx.navigation:navigation-fragment-ktx:$versions.androidXNavigation"
+androidx.navigation_ui = "androidx.navigation:navigation-ui-ktx:$versions.androidXNavigation"
+androidx.navigation_safe_args = "androidx.navigation:navigation-safe-args-gradle-plugin:$versions.androidXNavigation"
+
+androidx.runner = "androidx.test:runner:$versions.androidXTest"
+androidx.rules ="androidx.test:rules:$versions.androidXTest"
+deps.androidx = androidx
+
+def support = [:]
+support.java_inject = "javax.inject:javax.inject:$versions.supportJavaInject"
+deps.support = support
+
+def google = [:]
+google.material = "com.google.android.material:material:$versions.material"
+deps.google = google
+
+def dagger = [:]
+dagger.runtime = "com.google.dagger:dagger:$versions.dagger"
+dagger.android = "com.google.dagger:dagger-android:$versions.dagger"
+dagger.android_support = "com.google.dagger:dagger-android-support:$versions.dagger"
+dagger.compiler = "com.google.dagger:dagger-compiler:$versions.dagger"
+dagger.processor = "com.google.dagger:dagger-android-processor:$versions.dagger"
+dagger.injectAnnotation = 'com.squareup.inject:assisted-inject-annotations-dagger2:0.5.2'
+dagger.injectProcessor = 'com.squareup.inject:assisted-inject-processor-dagger2:0.5.2'
+deps.dagger = dagger
+
+def okhttp = [:]
+okhttp.runtime = "com.squareup.okhttp3:okhttp:$versions.okHttp3"
+okhttp.logging = "com.squareup.okhttp3:logging-interceptor:$versions.okHttp3"
+okhttp.mock = "com.squareup.okhttp3:mockwebserver:$versions.okHttp3"
+deps.okhttp = okhttp
+
+def retrofit = [:]
+retrofit.coroutine =  "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$versions.retrofit2Coroutine"
+retrofit.gson =  "com.squareup.retrofit2:converter-gson:$versions.retrofit2"
+retrofit.mock =  "com.squareup.retrofit2:retrofit-mock:$versions.retrofit2"
+retrofit.runtime = "com.squareup.retrofit2:retrofit:$versions.retrofit2"
+deps.retrofit = retrofit
+
+def gson = [:]
+gson.runtime = "com.google.code.gson:gson:$versions.gson"
+deps.gson = gson
+
+def glide = [:]
+glide.runtime = "com.github.bumptech.glide:glide:$versions.glide"
+glide.compiler = "com.github.bumptech.glide:compiler:$versions.glide"
+deps.glide = glide
+
+def test = [:]
+test.junit = "junit:junit:$versions.junit"
+test.kotlin = "org.jetbrains.kotlin:kotlin-test-junit:$versions.kotlin"
+deps.test = test
+
+def mockito = [:]
+mockito.core = "org.mockito:mockito-core:$versions.mockito"
+mockito.inline = "org.mockito:mockito-inline:$versions.mockito"
+mockito.android = "org.mockito:mockito-android:$versions.mockito"
+mockito.kotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:$versions.mockitoKotlin"
+deps.mockito = mockito
+
+ext.deps = deps
+
+def addRepos(RepositoryHandler handler) {
+    handler.google()
+    handler.jcenter()
+    handler.mavenCentral()
+    handler.maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+    handler.maven { url 'https://maven.fabric.io/public' }
+    handler.maven { url 'https://jitpack.io' }
+}
+ext.addRepos = this.&addRepos

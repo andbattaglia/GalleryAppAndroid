@@ -1,0 +1,5 @@
+rootProject.name='GalleryAppAndroid'
+include ':app'
+include ':app_data'
+include ':app_domain'
+include ':app_usecase'
