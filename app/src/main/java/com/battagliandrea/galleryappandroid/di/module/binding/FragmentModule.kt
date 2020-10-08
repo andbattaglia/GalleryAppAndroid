@@ -1,7 +1,8 @@
 package com.battagliandrea.galleryappandroid.di.module.binding
 
 import com.battagliandrea.galleryappandroid.di.scope.FragmentScope
-import com.battagliandrea.galleryappandroid.ui.list.ImageGridFragment
+import com.battagliandrea.galleryappandroid.ui.bookmarks.BookmarksFragment
+import com.battagliandrea.galleryappandroid.ui.list.ImagesFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -10,5 +11,9 @@ abstract class FragmentModule {
 
     @FragmentScope
     @ContributesAndroidInjector
-    abstract fun imageGridFragment(): ImageGridFragment
+    abstract fun imagesFragment(): ImagesFragment
+
+    @FragmentScope
+    @ContributesAndroidInjector
+    abstract fun bookmarksFragment(): BookmarksFragment
 }

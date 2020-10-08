@@ -1,10 +1,11 @@
 <!--?xml version="1.0" encoding="UTF-8"?-->
 <resources>
 
-  <color name="primaryColor">@color/grey900</color>
-  <color name="primaryLightColor">@color/grey900</color>
-  <color name="primaryDarkColor">@color/grey900</color>
+  <color name="primaryColor">@color/white</color>
+  <color name="primaryLightColor">@color/whiteAlpha60</color>
+  <color name="primaryDarkColor">@color/whiteAlpha38</color>
 
+  <color name="white">#FFFFFF</color>
   <color name="whiteAlpha87">#DEFFFFFF</color>
   <color name="whiteAlpha60">#99FFFFFF</color>
   <color name="whiteAlpha38">#61FFFFFF</color>
@@ -13,9 +14,9 @@
   <color name="blackAlpha60">#99000000</color>
   <color name="blackAlpha38">#61000000</color>
 
-  <color name="grey900">#0b1316</color>
-  <color name="grey900Light">#32393c</color>
-  <color name="grey900Dark">#000000</color>
+  <color name="grey300">#e0e0e0</color>
+  <color name="grey300Light">#ffffff</color>
+  <color name="grey300Dark">#aeaeae</color>
 
   <color name="orange">#F59F27</color>
 

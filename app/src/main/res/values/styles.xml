@@ -2,7 +2,7 @@
 <resources>
 
     <!-- BASE THEME-->
-    <style name="GalleryAppTheme" parent="Theme.MaterialComponents.NoActionBar">
+    <style name="GalleryAppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
 
         <!--THEME DEFAULT-->
         <item name="colorPrimary">@color/primaryColor</item>
@@ -12,6 +12,15 @@
         <item name="backgroundColor">@color/primaryColor</item>
     </style>
 
+    <!-- BOTTOM NAVIGATION STYLE THEME-->
+    <style name="GalleryAppTheme.BottomNavigation">
+        <item name="android:background">@color/primaryColor</item>
+        <item name="itemIconTint">@drawable/selector_grey</item>
+        <item name="itemTextColor">@drawable/selector_grey</item>
+        <item name="paddingStart">@dimen/default_padding</item>
+        <item name="paddingEnd">@dimen/default_padding</item>
+    </style>
+
     <!-- TEXT THEME -->
     <style name="TextStyle">
         <item name="android:background">?attr/colorSurface</item>
@@ -19,19 +28,19 @@
 
     <style name="TextPrimary.H5.Header" parent="TextStyle">
         <item name="android:textSize">24sp</item>
-        <item name="android:textColor">@color/whiteAlpha87</item>
+        <item name="android:textColor">@color/blackAlpha87</item>
         <item name="fontFamily">@font/raleway_extrabold</item>
     </style>
 
     <style name="TextPrimary.H6.Header" parent="TextStyle">
         <item name="android:textSize">20sp</item>
-        <item name="android:textColor">@color/whiteAlpha87</item>
+        <item name="android:textColor">@color/blackAlpha87</item>
         <item name="fontFamily">@font/raleway_semibold</item>
     </style>
 
     <style name="TextPrimary.B1.Header" parent="TextStyle">
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/whiteAlpha87</item>
+        <item name="android:textColor">@color/blackAlpha87</item>
         <item name="fontFamily">@font/raleway_semibold</item>
     </style>
 
@@ -44,7 +53,7 @@
 
     <style name="TextPrimary.B2.Body" parent="TextStyle">
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/whiteAlpha60</item>
+        <item name="android:textColor">@color/blackAlpha87</item>
         <item name="fontFamily">@font/raleway_medium</item>
     </style>
 
@@ -56,7 +65,7 @@
 
     <style name="TextSecondary.B2.Body" parent="TextStyle">
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/blackAlpha60</item>
+        <item name="android:textColor">@color/blackAlpha87</item>
         <item name="fontFamily">@font/raleway_medium</item>
     </style>
 

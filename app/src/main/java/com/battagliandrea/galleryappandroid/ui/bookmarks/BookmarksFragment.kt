@@ -1,4 +1,4 @@
-package com.battagliandrea.galleryappandroid.ui.list
+package com.battagliandrea.galleryappandroid.ui.bookmarks
 
 import android.content.Context
 import android.os.Bundle
@@ -12,15 +12,15 @@ import com.battagliandrea.galleryappandroid.ext.getViewModel
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
-class ImageGridFragment : Fragment() {
+class BookmarksFragment : Fragment() {
 
-    private lateinit var mViewModel: ImageGridViewModel
+    private lateinit var mViewModel: BookmarksViewModel
 
     @Inject
     lateinit var abstractFactory: InjectingSavedStateViewModelFactory
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_image_grid, container, false)
+        return inflater.inflate(R.layout.fragment_bookmarks, container, false)
     }
 
     override fun onAttach(context: Context) {
@@ -31,7 +31,7 @@ class ImageGridFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mViewModel = getViewModel<ImageGridViewModel>(abstractFactory, savedInstanceState)
+        mViewModel = getViewModel<BookmarksViewModel>(abstractFactory, savedInstanceState)
         with(mViewModel) {}
 
     }

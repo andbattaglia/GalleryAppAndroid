@@ -1,4 +1,4 @@
-package com.battagliandrea.galleryappandroid.ui.list
+package com.battagliandrea.galleryappandroid.ui.bookmarks
 
 
 import androidx.lifecycle.*
@@ -7,13 +7,13 @@ import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
 import kotlinx.coroutines.*
 
-open class ImageGridViewModel @AssistedInject constructor(
+open class BookmarksViewModel @AssistedInject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
     @AssistedInject.Factory
-    interface Factory : AssistedSavedStateViewModelFactory<ImageGridViewModel> {
-        override fun create(savedStateHandle: SavedStateHandle): ImageGridViewModel
+    interface Factory : AssistedSavedStateViewModelFactory<BookmarksViewModel> {
+        override fun create(savedStateHandle: SavedStateHandle): BookmarksViewModel
     }
 
     init {

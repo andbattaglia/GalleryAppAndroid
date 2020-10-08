@@ -3,12 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/fragment_images_grid">
+    app:startDestination="@id/fragment_images">
 
     <fragment
-        android:id="@+id/fragment_images_grid"
-        android:name="com.battagliandrea.galleryappandroid.ui.list.ImageGridFragment"
-        tools:layout="@layout/fragment_image_grid">
+        android:id="@+id/fragment_images"
+        android:name="com.battagliandrea.galleryappandroid.ui.list.ImagesFragment"
+        tools:layout="@layout/fragment_images">
+        <action
+            android:id="@+id/action_fragment_images_to_fragment_bookmarks"
+            app:destination="@id/fragment_bookmarks" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_bookmarks"
+        android:name="com.battagliandrea.galleryappandroid.ui.bookmarks.BookmarksFragment"
+        tools:layout="@layout/fragment_bookmarks">
     </fragment>
 
 </navigation>

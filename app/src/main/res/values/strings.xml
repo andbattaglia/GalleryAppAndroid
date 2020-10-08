@@ -4,5 +4,9 @@
 
     <string name="title">Gallery App</string>
 
+    <string name="search">Search</string>
+    <string name="images">Images</string>
+    <string name="bookmarks">Bookmarks</string>
+
 </resources>
 
