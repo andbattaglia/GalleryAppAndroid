@@ -17,6 +17,7 @@ versions.androidXmultidex = '2.0.0'
 versions.material = '1.2.0-alpha06'
 
 versions.supportJavaInject = '1'
+versions.apache = '1.7'
 
 versions.dagger = '2.16'
 versions.daggerAssisted = '0.5.1'
@@ -67,6 +68,7 @@ androidx.rules ="androidx.test:rules:$versions.androidXTest"
 deps.androidx = androidx
 
 def support = [:]
+support.apache_text = "org.apache.commons:commons-text:$versions.apache"
 support.java_inject = "javax.inject:javax.inject:$versions.supportJavaInject"
 deps.support = support
 

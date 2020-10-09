@@ -26,44 +26,37 @@
         <item name="android:background">?attr/colorSurface</item>
     </style>
 
-    <style name="TextPrimary.H5.Header" parent="TextStyle">
+    <style name="TextPrimary.H5" parent="TextStyle">
         <item name="android:textSize">24sp</item>
         <item name="android:textColor">@color/blackAlpha87</item>
         <item name="fontFamily">@font/raleway_extrabold</item>
     </style>
 
-    <style name="TextPrimary.H6.Header" parent="TextStyle">
+    <style name="TextPrimary.H6" parent="TextStyle">
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/blackAlpha87</item>
         <item name="fontFamily">@font/raleway_semibold</item>
     </style>
 
-    <style name="TextPrimary.B1.Header" parent="TextStyle">
+    <style name="TextPrimary.B1" parent="TextStyle">
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/blackAlpha87</item>
         <item name="fontFamily">@font/raleway_semibold</item>
     </style>
 
-    <style name="TextPrimary.B2.Button" parent="TextStyle">
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/orange</item>
-        <item name="android:textAllCaps">true</item>
-        <item name="fontFamily">@font/raleway</item>
-    </style>
-
-    <style name="TextPrimary.B2.Body" parent="TextStyle">
+    <style name="TextPrimary.B2" parent="TextStyle">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/blackAlpha87</item>
         <item name="fontFamily">@font/raleway_medium</item>
     </style>
 
-    <style name="TextSecondary.B1.Header" parent="TextStyle">
+    <style name="TextSecondary.B1" parent="TextStyle">
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/blackAlpha87</item>
+        <item name="android:textColor">@color/whiteAlpha87</item>
         <item name="fontFamily">@font/raleway_semibold</item>
     </style>
 
-    <style name="TextSecondary.B2.Body" parent="TextStyle">
+    <style name="TextSecondary.B2" parent="TextStyle">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/blackAlpha87</item>
         <item name="fontFamily">@font/raleway_medium</item>

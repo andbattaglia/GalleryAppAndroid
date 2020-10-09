@@ -24,6 +24,7 @@
         android:clipToPadding="false"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="2"/>
+        app:spanCount="2"
+        tools:listitem="@layout/view_image_item"/>
 
 </LinearLayout>

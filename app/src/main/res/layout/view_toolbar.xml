@@ -17,7 +17,7 @@
             android:layout_gravity="center"
             android:maxLines="1"
             android:ellipsize="end"
-            android:textAppearance="@style/TextPrimary.H5.Header"
+            android:textAppearance="@style/TextPrimary.H5"
             android:text="@string/title"/>
     </com.google.android.material.appbar.MaterialToolbar>
 

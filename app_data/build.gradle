@@ -10,6 +10,7 @@ dependencies {
 
     implementation deps.gson.runtime
 
+    api deps.support.apache_text
     api deps.support.java_inject
 }
 

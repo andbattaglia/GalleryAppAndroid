@@ -6,4 +6,8 @@
     <dimen name="default_padding">16dp</dimen>
     <dimen name="default_double_padding">32dp</dimen>
 
+    <dimen name="default_corner_radius">16dp</dimen>
+    <dimen name="default_elevation">4dp</dimen>
+
+
 </resources>
