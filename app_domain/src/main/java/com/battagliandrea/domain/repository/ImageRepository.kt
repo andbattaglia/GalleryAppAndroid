@@ -11,4 +11,12 @@ interface ImageRepository {
     suspend fun pull(search: String, force: Boolean)
 
     suspend fun get() : List<Image>
+
+    suspend fun observeBookmarks(): Flow<List<Image>>
+
+    suspend fun pullBookmarks()
+
+    suspend fun setBookmark(id: String) : Image
+
+    suspend fun removeBookmark(id: String) : Image
 }

@@ -26,6 +26,8 @@ versions.retrofit2 = '2.6.0'
 versions.retrofit2Coroutine = '0.9.2'
 versions.okHttp3 = '3.11.0'
 
+versions.room = '2.2.0'
+
 versions.gson = '2.8.5'
 
 versions.glide = '4.8.0'
@@ -98,6 +100,12 @@ retrofit.gson =  "com.squareup.retrofit2:converter-gson:$versions.retrofit2"
 retrofit.mock =  "com.squareup.retrofit2:retrofit-mock:$versions.retrofit2"
 retrofit.runtime = "com.squareup.retrofit2:retrofit:$versions.retrofit2"
 deps.retrofit = retrofit
+
+def room = [:]
+room.runtime = "androidx.room:room-runtime:$versions.room"
+room.compiler = "androidx.room:room-compiler:$versions.room"
+room.ktx = "androidx.room:room-ktx:$versions.room"
+deps.room = room
 
 def gson = [:]
 gson.runtime = "com.google.code.gson:gson:$versions.gson"

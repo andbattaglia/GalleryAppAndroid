@@ -7,6 +7,7 @@ import com.battagliandrea.galleryappandroid.di.module.binding.FragmentModule
 import com.battagliandrea.galleryappandroid.di.module.data.DataSourceModule
 import com.battagliandrea.galleryappandroid.di.module.data.RepositoryModule
 import com.battagliandrea.galleryappandroid.di.module.framework.RetrofitModule
+import com.battagliandrea.galleryappandroid.di.module.framework.RoomModule
 import com.battagliandrea.galleryappandroid.di.viewmodel.BuilderModule
 import dagger.BindsInstance
 import dagger.Component
@@ -25,9 +26,11 @@ import javax.inject.Singleton
             RepositoryModule::class,
             DataSourceModule::class,
             RetrofitModule::class,
+            RoomModule::class,
             AndroidSupportInjectionModule::class
         ]
 )
+
 interface AppComponent : AndroidInjector<DaggerApplication> {
 
     override fun inject(instance: DaggerApplication)
@@ -38,9 +41,6 @@ interface AppComponent : AndroidInjector<DaggerApplication> {
         @BindsInstance
         fun application(app: Application): Builder
 
-        fun retrofitModule(module: RetrofitModule): Builder
-
         fun build(): AppComponent
     }
-
 }

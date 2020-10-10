@@ -9,11 +9,14 @@
         android:id="@+id/fragment_images"
         android:name="com.battagliandrea.galleryappandroid.ui.imagesgallery.ImagesGalleryFragment"
         tools:layout="@layout/fragment_images">
+
         <action
             android:id="@+id/action_fragment_images_to_fragment_pager"
             app:destination="@id/fragment_pager"
-            app:enterAnim="@anim/fragment_fade_enter"
-            app:exitAnim="@anim/fragment_fade_exit">
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_open_enter"
+            app:popExitAnim="@anim/fragment_open_exit">
 
             <argument
                 android:name="imageId"

@@ -28,6 +28,10 @@ dependencies {
         exclude module: 'okhttp'
     }
 
+    implementation deps.room.runtime
+    implementation deps.room.ktx
+    kapt deps.room.compiler
+
     implementation deps.androidx.appcompat
     implementation deps.androidx.lifecycleExt
     implementation deps.androidx.lifecycleViewmodel

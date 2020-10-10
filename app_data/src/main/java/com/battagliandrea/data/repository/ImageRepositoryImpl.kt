@@ -1,5 +1,6 @@
 package com.battagliandrea.data.repository
 
+import com.battagliandrea.data.database.RoomDataSource
 import com.battagliandrea.data.networking.RedditApiDataSource
 import com.battagliandrea.domain.model.Image
 import com.battagliandrea.domain.repository.ImageRepository
@@ -13,14 +14,19 @@ import javax.inject.Singleton
 
 @Singleton
 open class ImageRepositoryImpl @Inject constructor(
-        private val redditApiDataSource: RedditApiDataSource
+        private val redditApiDataSource: RedditApiDataSource,
+        private val roomDataSource: RoomDataSource
 ) : ImageRepository {
 
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //          IMAGES
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         private val imagesCache: MutableList<Image> = mutableListOf()
 
         @ExperimentalCoroutinesApi
         private val imagesChannel: ConflatedBroadcastChannel<List<Image>> = ConflatedBroadcastChannel()
 
+        @ExperimentalCoroutinesApi
         override suspend fun observe(): Flow<List<Image>> {
                 return imagesChannel.asFlow()
         }
@@ -42,4 +48,36 @@ open class ImageRepositoryImpl @Inject constructor(
                 return imagesCache
         }
 
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //          BOOKMARKS
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        @ExperimentalCoroutinesApi
+        private val bookmarksChannel: ConflatedBroadcastChannel<List<Image>> = ConflatedBroadcastChannel()
+
+        @ExperimentalCoroutinesApi
+        override suspend fun observeBookmarks(): Flow<List<Image>> {
+               return bookmarksChannel.asFlow()
+        }
+
+        @ExperimentalCoroutinesApi
+        override suspend fun pullBookmarks() {
+                return roomDataSource.getBookmarks()
+                        .let { localData ->
+                                bookmarksChannel.send(localData)
+                        }
+        }
+
+        override suspend fun setBookmark(id: String): Image {
+                return imagesCache
+                        .first { image -> image.id == id }
+                        .let { image ->
+                                roomDataSource.insertBookmarks(image)
+                        }
+        }
+
+        override suspend fun removeBookmark(id: String): Image {
+                return roomDataSource.removeBookmarks(id)
+        }
 }

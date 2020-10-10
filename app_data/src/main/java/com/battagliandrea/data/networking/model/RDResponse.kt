@@ -94,7 +94,7 @@ fun List<RDResponse.Data.Children?>.toImages(): List<Image>{
 
 fun RDResponse.Data.Children?.toImage(): Image {
     return Image(
-        id = this?.data?.author.orEmpty(),
+        id = this?.data?.id.orEmpty(),
         author = this?.data?.author.orEmpty(),
         title = this?.data?.title.orEmpty(),
         thumbnailUrl = this?.data?.thumbnail.orEmpty(),
