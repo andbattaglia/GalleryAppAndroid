@@ -8,5 +8,7 @@
     <string name="images">Images</string>
     <string name="bookmarks">Bookmarks</string>
 
+    <string name="search_empty_state">Try to searching somethings to see related images.</string>
+
 </resources>
 

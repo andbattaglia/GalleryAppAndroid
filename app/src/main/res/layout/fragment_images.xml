@@ -10,21 +10,32 @@
     android:paddingEnd="@dimen/default_padding"
     tools:context="com.battagliandrea.galleryappandroid.ui.images.ImagesFragment">
 
-    <include android:id="@+id/searchView"
+    <include
         layout="@layout/view_search_bar"/>
 
     <Space
         android:layout_width="match_parent"
         android:layout_height="@dimen/default_padding"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:orientation="vertical"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="2"
-        tools:listitem="@layout/view_image_item"/>
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
+            tools:listitem="@layout/view_image_item"/>
+
+        <include
+            android:id="@+id/emptyState"
+            android:visibility="visible"
+            tools:visibility="gone"
+            layout="@layout/view_empty_state"/>
+    </FrameLayout>
 
 </LinearLayout>

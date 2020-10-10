@@ -2,6 +2,8 @@ package com.battagliandrea.galleryappandroid.ui.images
 
 import android.content.Context
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,10 +16,11 @@ import com.battagliandrea.galleryappandroid.ext.getViewModel
 import com.battagliandrea.galleryappandroid.ext.observe
 import com.battagliandrea.galleryappandroid.ui.adapters.images.base.ImagesAdapter
 import com.battagliandrea.galleryappandroid.ui.adapters.images.model.BaseImageItem
-import com.battagliandrea.galleryappandroid.ui.adapters.images.model.toImageItems
 import com.battagliandrea.galleryappandroid.ui.base.ViewState
+import com.battagliandrea.galleryappandroid.ui.utils.MarginItemDecorator
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_images.*
+import kotlinx.android.synthetic.main.view_search_bar.*
 import javax.inject.Inject
 
 class ImagesFragment : Fragment() {
@@ -50,13 +53,27 @@ class ImagesFragment : Fragment() {
         }
 
         setupList()
+        setupSearch()
+
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //          SETUP
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    private fun setupSearch(){
+        etSearch.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+                mViewModel.search(p0.toString())
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+        })
+    }
+
     private fun setupList(){
         recyclerView.adapter = mAdapter
+        recyclerView.addItemDecoration(MarginItemDecorator(resources.getDimension(R.dimen.default_quarter_padding).toInt()))
 
         val lm = recyclerView.layoutManager as GridLayoutManager
         lm.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
@@ -72,7 +89,9 @@ class ImagesFragment : Fragment() {
     private fun renderBeers(viewState: ViewState<List<BaseImageItem>>){
         when(viewState){
             is ViewState.Success -> {
-                mAdapter.updateList(data = viewState.data.orEmpty())
+                val data = viewState.data.orEmpty()
+                emptyState.visibility =  if(data.isEmpty()) View.VISIBLE else View.GONE
+                mAdapter.updateList(data = data)
             }
             is ViewState.Error -> {
                 Toast.makeText(context, "ERROR", Toast.LENGTH_SHORT).show()

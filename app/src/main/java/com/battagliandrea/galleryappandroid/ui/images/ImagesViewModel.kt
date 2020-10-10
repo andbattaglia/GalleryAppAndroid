@@ -26,19 +26,20 @@ open class ImagesViewModel @AssistedInject constructor(
         override fun create(savedStateHandle: SavedStateHandle): ImagesViewModel
     }
 
+    private var searchJob: Job? = null
+
     private val _imagesListVS = MutableLiveData<ViewState<List<BaseImageItem>>>()
     val imagesListVS: LiveData<ViewState<List<BaseImageItem>>> = _imagesListVS
 
     init {
         observer()
-        search()
     }
 
     @ExperimentalCoroutinesApi
     private fun observer(){
         viewModelScope.launch {
             try {
-                observeImages().collect {images ->
+                observeImages().collect { images ->
                     _imagesListVS.postValue(ViewState.Success(data = images.toImageItems()))
                 }
 
@@ -48,15 +49,21 @@ open class ImagesViewModel @AssistedInject constructor(
         }
     }
 
-    fun search(){
-        viewModelScope.launch {
-            try{
-                _imagesListVS.postValue(ViewState.Loading())
-                withContext(Dispatchers.Default) { searchImages(search = "Android", force = false) }
+    fun search(text: String){
+        searchJob?.cancel()
 
-            } catch (e: Exception){
-                e.printStackTrace()
+        if(text.length > 3){
+            searchJob = viewModelScope.launch {
+                try{
+                    delay(300);
+                    _imagesListVS.postValue(ViewState.Loading())
+                    withContext(Dispatchers.Default) { searchImages(search = text, force = true) }
+                } catch (e: Exception){
+                    e.printStackTrace()
+                }
             }
+        } else {
+            _imagesListVS.postValue(ViewState.Success(data = emptyList()))
         }
     }
 

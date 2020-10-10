@@ -46,34 +46,6 @@
             app:layout_constraintVertical_chainStyle="packed"
             tools:text="#001" />
 
-<!--        <androidx.appcompat.widget.AppCompatTextView-->
-<!--            android:id="@+id/tvName"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:maxLines="1"-->
-<!--            android:ellipsize="end"-->
-<!--            android:textAppearance="@style/TextStyle.B3"-->
-<!--            android:paddingStart="@dimen/default_quarter_padding"-->
-<!--            android:paddingEnd="@dimen/default_quarter_padding"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/tvId"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintEnd_toStartOf="@id/ivAvatar"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintHorizontal_chainStyle="spread_inside"-->
-<!--            tools:text="Pokemon name" />-->
-
-<!--        <androidx.appcompat.widget.AppCompatImageView-->
-<!--            android:id="@+id/ivBackground"-->
-<!--            android:layout_width="72dp"-->
-<!--            android:layout_height="72dp"-->
-
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toEndOf="@id/tvName"/>-->
-
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

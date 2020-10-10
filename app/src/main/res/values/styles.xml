@@ -10,6 +10,7 @@
         <item name="colorPrimaryDark">@color/primaryColor</item>
         <item name="colorAccent">@color/orange</item>
         <item name="backgroundColor">@color/primaryColor</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <!-- BOTTOM NAVIGATION STYLE THEME-->
