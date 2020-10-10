@@ -1,10 +1,7 @@
 package com.battagliandrea.galleryappandroid.ui.main
 
 import android.os.Bundle
-import android.view.View
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.battagliandrea.galleryappandroid.R
 import com.google.android.material.bottomnavigation.BottomNavigationView

@@ -7,8 +7,7 @@
     android:orientation="vertical"
     android:paddingTop="@dimen/default_padding"
     android:paddingStart="@dimen/default_padding"
-    android:paddingEnd="@dimen/default_padding"
-    tools:context="com.battagliandrea.galleryappandroid.ui.images.ImagesFragment">
+    android:paddingEnd="@dimen/default_padding">
 
     <include
         layout="@layout/view_search_bar"/>
@@ -28,13 +27,17 @@
             android:clipToPadding="false"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:spanCount="2"
-            tools:listitem="@layout/view_image_item"/>
+            app:spanCount="3"
+            tools:listitem="@layout/view_thumb_item"/>
+
+        <include
+            android:id="@+id/tutorial"
+            android:visibility="gone"
+            layout="@layout/view_tutorial"/>
 
         <include
             android:id="@+id/emptyState"
-            android:visibility="visible"
-            tools:visibility="gone"
+            android:visibility="gone"
             layout="@layout/view_empty_state"/>
     </FrameLayout>
 

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:foreground="?android:attr/selectableItemBackground"
     android:clickable="true"
     android:focusable="true"
@@ -27,6 +27,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintDimensionRatio="H,1:1"
             tools:src="@tools:sample/avatars"/>
 
         <androidx.constraintlayout.widget.Guideline
@@ -53,30 +54,18 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:padding="@dimen/default_half_padding"
-            android:maxLines="3"
-            android:ellipsize="end"
-            android:textAppearance="@style/TextSecondary.H6"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/tvAuthor"
-            app:layout_constraintVertical_chainStyle="packed"
-            app:layout_constraintVertical_bias="1.0"
-            tools:text="@tools:sample/lorem/random" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvAuthor"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/default_half_padding"
             android:ellipsize="end"
             android:maxLines="1"
-            android:textAppearance="@style/TextSecondary.B2"
-            app:layout_constraintTop_toBottomOf="@id/tvTitle"
+            android:paddingStart="@dimen/default_quarter_padding"
+            android:paddingEnd="@dimen/default_quarter_padding"
+            android:textAppearance="@style/TextSecondary.B1"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
             tools:text="@tools:sample/lorem/random" />
 
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.cardview.widget.CardView>

@@ -1,9 +1,9 @@
 package com.battagliandrea.galleryappandroid.di
 
 import android.app.Application
+import com.battagliandrea.galleryappandroid.di.module.UtilsModule
 import com.battagliandrea.galleryappandroid.di.module.binding.ActivityModule
 import com.battagliandrea.galleryappandroid.di.module.binding.FragmentModule
-import com.battagliandrea.galleryappandroid.di.module.*
 import com.battagliandrea.galleryappandroid.di.module.data.DataSourceModule
 import com.battagliandrea.galleryappandroid.di.module.data.RepositoryModule
 import com.battagliandrea.galleryappandroid.di.module.framework.RetrofitModule

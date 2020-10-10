@@ -7,8 +7,10 @@
     <string name="search">Search</string>
     <string name="images">Images</string>
     <string name="bookmarks">Bookmarks</string>
+    <string name="author">Author</string>
 
-    <string name="search_empty_state">Try to searching somethings to see related images.</string>
+    <string name="search_tutorial">Try to searching somethings to see related images.</string>
+    <string name="search_empty_state">Ops! There is no results related to your search. Try to searching another term.</string>
 
 </resources>
 

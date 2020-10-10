@@ -1,12 +1,12 @@
-package com.battagliandrea.galleryappandroid.ui.adapters.images.base
+package com.battagliandrea.galleryappandroid.ui.adapters.thumbs.base
 
 import androidx.recyclerview.widget.DiffUtil
-import com.battagliandrea.galleryappandroid.ui.adapters.images.model.BaseImageItem
-import com.battagliandrea.galleryappandroid.ui.adapters.images.model.ImageItem
+import com.battagliandrea.galleryappandroid.ui.adapters.thumbs.model.BaseThumbItem
+import com.battagliandrea.galleryappandroid.ui.adapters.thumbs.model.ThumbItem
 
-class  ImagesDiffUtils(
-    private val oldThumbs: List<BaseImageItem>,
-    private val newThumbs: List<BaseImageItem>
+class  ThumbsDiffUtils(
+    private val oldThumbs: List<BaseThumbItem>,
+    private val newThumbs: List<BaseThumbItem>
 ) : DiffUtil.Callback() {
 
     override fun getOldListSize(): Int = oldThumbs.size
@@ -21,8 +21,8 @@ class  ImagesDiffUtils(
         val oldImage = oldThumbs[oldPosition]
         val newImage = newThumbs[newPosition]
         return oldImage.id == newImage.id
-                && oldImage is ImageItem
-                && newImage is ImageItem
+                && oldImage is ThumbItem
+                && newImage is ThumbItem
                 && oldImage.imageUrl == newImage.imageUrl
                 && oldImage.title == newImage.title
     }

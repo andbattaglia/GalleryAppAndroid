@@ -3,7 +3,8 @@ package com.battagliandrea.galleryappandroid.di.viewmodel
 import androidx.lifecycle.ViewModel
 import com.abdroid.jrv.core.android.dagger.ViewModelKey
 import com.battagliandrea.galleryappandroid.ui.bookmarks.BookmarksViewModel
-import com.battagliandrea.galleryappandroid.ui.images.ImagesViewModel
+import com.battagliandrea.galleryappandroid.ui.imagesgallery.ImagesGalleryViewModel
+import com.battagliandrea.galleryappandroid.ui.imagespager.ImagesPagerViewModel
 import com.squareup.inject.assisted.dagger2.AssistedModule
 import dagger.Binds
 import dagger.Module
@@ -16,8 +17,13 @@ abstract class BuilderModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(ImagesViewModel::class)
-    abstract fun bindImagesViewModelFactory(f: ImagesViewModel.Factory): AssistedSavedStateViewModelFactory<out ViewModel>
+    @ViewModelKey(ImagesGalleryViewModel::class)
+    abstract fun bindImagesViewModelFactory(f: ImagesGalleryViewModel.Factory): AssistedSavedStateViewModelFactory<out ViewModel>
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ImagesPagerViewModel::class)
+    abstract fun bindImagesPagerViewModelFactory(f: ImagesPagerViewModel.Factory): AssistedSavedStateViewModelFactory<out ViewModel>
 
     @Binds
     @IntoMap

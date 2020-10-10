@@ -1,11 +1,13 @@
 package com.battagliandrea.galleryappandroid.ui.bookmarks
 
 
-import androidx.lifecycle.*
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.battagliandrea.galleryappandroid.di.viewmodel.AssistedSavedStateViewModelFactory
 import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
-import kotlinx.coroutines.*
+import kotlinx.coroutines.cancel
 
 open class BookmarksViewModel @AssistedInject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle

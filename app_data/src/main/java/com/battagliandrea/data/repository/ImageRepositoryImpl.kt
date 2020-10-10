@@ -38,4 +38,8 @@ open class ImageRepositoryImpl @Inject constructor(
                         }
         }
 
+        override suspend fun get(): List<Image> {
+                return imagesCache
+        }
+
 }

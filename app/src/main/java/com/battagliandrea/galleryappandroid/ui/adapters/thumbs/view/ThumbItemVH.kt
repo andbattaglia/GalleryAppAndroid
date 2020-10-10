@@ -1,20 +1,18 @@
-package com.battagliandrea.galleryappandroid.ui.adapters.images.view
+package com.battagliandrea.galleryappandroid.ui.adapters.thumbs.view
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.battagliandrea.galleryappandroid.R
-import com.battagliandrea.galleryappandroid.ui.adapters.images.model.ImageItem
+import com.battagliandrea.galleryappandroid.ui.adapters.thumbs.model.ThumbItem
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
-import kotlinx.android.synthetic.main.view_image_item.view.*
+import kotlinx.android.synthetic.main.view_thumb_item.view.*
 
-class ImageItemVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class ThumbItemVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    fun render(item: ImageItem) = with(itemView) {
+    fun render(item: ThumbItem, listener: OnThumbClickListener? = null) = with(itemView) {
 
         tvTitle.text = item.title
-        tvAuthor.text = "${context.getString(R.string.author)} : ${item.author}"
 
         Glide.with(this)
             .load(item.imageUrl)
@@ -23,5 +21,9 @@ class ImageItemVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .dontAnimate())
             .into(iv)
+
+        itemView.setOnClickListener {
+            listener?.onItemClick(item)
+        }
     }
 }

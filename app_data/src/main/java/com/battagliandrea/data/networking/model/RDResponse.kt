@@ -4,7 +4,6 @@ package com.battagliandrea.data.networking.model
 import com.battagliandrea.domain.model.Image
 import com.google.gson.annotations.SerializedName
 import org.apache.commons.text.StringEscapeUtils
-import javax.swing.text.html.HTML
 
 data class RDResponse(
     @SerializedName("data")
@@ -95,6 +94,7 @@ fun List<RDResponse.Data.Children?>.toImages(): List<Image>{
 
 fun RDResponse.Data.Children?.toImage(): Image {
     return Image(
+        id = this?.data?.author.orEmpty(),
         author = this?.data?.author.orEmpty(),
         title = this?.data?.title.orEmpty(),
         thumbnailUrl = this?.data?.thumbnail.orEmpty(),

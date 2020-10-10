@@ -9,4 +9,6 @@ interface ImageRepository {
     suspend fun observe(): Flow<List<Image>>
 
     suspend fun pull(search: String, force: Boolean)
+
+    suspend fun get() : List<Image>
 }
