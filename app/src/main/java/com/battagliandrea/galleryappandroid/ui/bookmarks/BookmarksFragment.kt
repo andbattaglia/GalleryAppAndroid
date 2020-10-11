@@ -9,12 +9,20 @@ import androidx.fragment.app.Fragment
 import com.battagliandrea.galleryappandroid.R
 import com.battagliandrea.galleryappandroid.di.viewmodel.InjectingSavedStateViewModelFactory
 import com.battagliandrea.galleryappandroid.ext.getViewModel
+import com.battagliandrea.galleryappandroid.ext.observe
+import com.battagliandrea.galleryappandroid.ui.adapters.thumbs.base.ThumbsAdapter
+import com.battagliandrea.galleryappandroid.ui.adapters.thumbs.model.BaseThumbItem
+import com.battagliandrea.galleryappandroid.ui.utils.MarginItemDecorator
 import dagger.android.support.AndroidSupportInjection
+import kotlinx.android.synthetic.main.fragment_images.*
 import javax.inject.Inject
 
 class BookmarksFragment : Fragment() {
 
     private lateinit var mViewModel: BookmarksViewModel
+
+    @Inject
+    lateinit var mAdapter: ThumbsAdapter
 
     @Inject
     lateinit var abstractFactory: InjectingSavedStateViewModelFactory
@@ -32,7 +40,34 @@ class BookmarksFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         mViewModel = getViewModel<BookmarksViewModel>(abstractFactory, savedInstanceState)
-        with(mViewModel) {}
+        with(mViewModel) {
+            observe(viewState){ state ->
+                when(state){
+                    is BookmarksViewModel.ViewState.Initialized -> {}
+                    is BookmarksViewModel.ViewState.Loading -> {}
+                    is BookmarksViewModel.ViewState.BookmarksLoaded -> renderImages(state.thumbs)
+                    is BookmarksViewModel.ViewState.BookmarkError -> {}
+                }
+            }
+        }
 
+        setupList()
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //          SETUP
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    private fun setupList(){
+        recyclerView.adapter = mAdapter
+        recyclerView.addItemDecoration(MarginItemDecorator(resources.getDimension(R.dimen.default_quarter_padding).toInt()))
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //          RENDER
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    private fun renderImages(data: List<BaseThumbItem>){
+//        tutorial.visibility =  View.GONE
+//        emptyState.visibility =  if(data.isEmpty()) View.VISIBLE else View.GONE
+        mAdapter.updateList(data = data)
     }
 }

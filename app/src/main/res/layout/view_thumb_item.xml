@@ -65,6 +65,16 @@
             app:layout_constraintVertical_chainStyle="packed"
             tools:text="@tools:sample/lorem/random" />
 
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnBookmark"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="@dimen/default_padding"
+            android:background="?android:selectableItemBackground"
+            android:src="@drawable/ic_bookmark"
+            android:tint="@drawable/selector_ic_bookmark_tint"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

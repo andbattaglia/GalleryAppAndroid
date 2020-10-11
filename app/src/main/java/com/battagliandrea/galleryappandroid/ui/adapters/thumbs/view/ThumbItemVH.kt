@@ -25,5 +25,14 @@ class ThumbItemVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.setOnClickListener {
             listener?.onItemClick(item)
         }
+
+        btnBookmark.setOnClickListener {
+            btnBookmark.isSelected = !btnBookmark.isSelected
+            if(btnBookmark.isSelected){
+                listener?.onBookmarkClick(item, true)
+            } else {
+                listener?.onBookmarkClick(item, false)
+            }
+        }
     }
 }

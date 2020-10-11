@@ -7,6 +7,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -106,6 +107,17 @@ class ImagesGalleryFragment : Fragment() {
             override fun onItemClick(thumb: ThumbItem) {
                 val action = ImagesGalleryFragmentDirections.actionFragmentImagesToFragmentPager(imageId = thumb.id)
                 findNavController().navigate(action)
+            }
+
+            override fun onBookmarkClick(thumb: ThumbItem, isSelected: Boolean) {
+
+                Toast.makeText(context, "${isSelected}", Toast.LENGTH_SHORT).show()
+
+                if(isSelected){
+                    mGalleryViewModel.saveBookmark(thumb.id)
+                } else {
+                    mGalleryViewModel.removeBookmark(thumb.id)
+                }
             }
         }
     }

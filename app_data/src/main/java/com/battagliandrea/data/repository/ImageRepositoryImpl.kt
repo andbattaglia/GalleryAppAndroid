@@ -69,15 +69,24 @@ open class ImageRepositoryImpl @Inject constructor(
                         }
         }
 
+        @ExperimentalCoroutinesApi
         override suspend fun setBookmark(id: String): Image {
-                return imagesCache
-                        .first { image -> image.id == id }
-                        .let { image ->
-                                roomDataSource.insertBookmarks(image)
-                        }
+                val image = imagesCache.first { image -> image.id == id }
+                roomDataSource.insertBookmarks(image)
+
+                val bookmarks = roomDataSource.getBookmarks()
+                bookmarksChannel.send(bookmarks)
+
+                return image
         }
 
+        @ExperimentalCoroutinesApi
         override suspend fun removeBookmark(id: String): Image {
-                return roomDataSource.removeBookmarks(id)
+                val image = roomDataSource.removeBookmarks(id)
+
+                val bookmarks = roomDataSource.getBookmarks()
+                bookmarksChannel.send(bookmarks)
+
+                return image
         }
 }

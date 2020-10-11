@@ -4,6 +4,8 @@ package com.battagliandrea.galleryappandroid.ui.imagesgallery
 import androidx.lifecycle.*
 import com.battagliandrea.domain.exception.CustomException
 import com.battagliandrea.domain.interactions.ObserveImagesStream
+import com.battagliandrea.domain.interactions.RemoveBookmark
+import com.battagliandrea.domain.interactions.SaveBookmark
 import com.battagliandrea.domain.interactions.SearchImages
 import com.battagliandrea.galleryappandroid.di.viewmodel.AssistedSavedStateViewModelFactory
 import com.battagliandrea.galleryappandroid.ui.adapters.thumbs.model.BaseThumbItem
@@ -16,7 +18,9 @@ import kotlinx.coroutines.flow.collect
 open class ImagesGalleryViewModel @AssistedInject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle,
     private val searchImages: SearchImages,
-    private val observeImages: ObserveImagesStream
+    private val observeImages: ObserveImagesStream,
+    private val saveBookmarkUseCase: SaveBookmark,
+    private val removeBookmarkUseCase: RemoveBookmark
 ) : ViewModel() {
 
     @AssistedInject.Factory
@@ -62,6 +66,26 @@ open class ImagesGalleryViewModel @AssistedInject constructor(
             }
         } else {
             _viewState.postValue(ViewState.Initialized)
+        }
+    }
+
+    fun saveBookmark(imageId: String){
+        viewModelScope.launch {
+            try{
+                withContext(Dispatchers.Default) { saveBookmarkUseCase(imageId = imageId) }
+            } catch (e: CustomException){
+                _viewState.postValue(ViewState.ImageLoadError(errorCode = e.errorCode))
+            }
+        }
+    }
+
+    fun removeBookmark(imageId: String){
+        viewModelScope.launch {
+            try{
+                withContext(Dispatchers.Default) { removeBookmarkUseCase(imageId = imageId) }
+            } catch (e: CustomException){
+                _viewState.postValue(ViewState.ImageLoadError(errorCode = e.errorCode))
+            }
         }
     }
 

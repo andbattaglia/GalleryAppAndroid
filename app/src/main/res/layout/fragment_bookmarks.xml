@@ -16,6 +16,7 @@
         android:clipToPadding="false"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="2"/>
+        app:spanCount="3"
+        tools:listitem="@layout/view_thumb_item"/>
 
 </FrameLayout>

@@ -8,7 +8,7 @@
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryVariant">@color/primaryLightColor</item>
         <item name="colorPrimaryDark">@color/primaryColor</item>
-        <item name="colorAccent">@color/orange</item>
+        <item name="colorAccent">@color/violet</item>
         <item name="backgroundColor">@color/primaryColor</item>
         <item name="android:windowLightStatusBar">true</item>
     </style>

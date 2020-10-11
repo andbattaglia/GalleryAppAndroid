@@ -27,7 +27,6 @@ class RoomDataSourceImpl @Inject constructor(
         }
     }
 
-    //TODO: fixError
     override suspend fun insertBookmarks(image: Image): Image {
         try{
             return database.bookmarksDao().insertBookmark(image.toBookmark()).let {
@@ -38,7 +37,6 @@ class RoomDataSourceImpl @Inject constructor(
         }
     }
 
-    //TODO: fixError
     override suspend fun removeBookmarks(id: String): Image {
         try{
             return database.bookmarksDao().findBookmarkById(id)
