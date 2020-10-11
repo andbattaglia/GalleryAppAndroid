@@ -12,5 +12,11 @@
     <string name="search_tutorial">Try to searching somethings to see related images.</string>
     <string name="search_empty_state">Ops! There is no results related to your search. Try to searching another term.</string>
 
+    <string name="error_message_0">Ops! There was a generic error.</string>
+    <string name="error_message_1">Ops! Something went wrong.</string>
+    <string name="error_message_2">Ops! There is no internet connection.</string>
+    <string name="error_message_3">Ops! There was an internal error</string>
+
+
 </resources>
 

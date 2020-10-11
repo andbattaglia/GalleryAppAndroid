@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.battagliandrea.galleryappandroid.R
 import com.battagliandrea.galleryappandroid.di.viewmodel.InjectingSavedStateViewModelFactory
+import com.battagliandrea.galleryappandroid.ext.getErrorMessage
 import com.battagliandrea.galleryappandroid.ext.getViewModel
 import com.battagliandrea.galleryappandroid.ext.observe
 import com.battagliandrea.galleryappandroid.ui.adapters.thumbs.base.ThumbsAdapter
@@ -19,6 +20,7 @@ import com.battagliandrea.galleryappandroid.ui.adapters.thumbs.model.BaseThumbIt
 import com.battagliandrea.galleryappandroid.ui.adapters.thumbs.model.ThumbItem
 import com.battagliandrea.galleryappandroid.ui.adapters.thumbs.view.OnThumbClickListener
 import com.battagliandrea.galleryappandroid.ui.utils.MarginItemDecorator
+import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_images.*
 import kotlinx.android.synthetic.main.view_search_bar.*
@@ -56,7 +58,7 @@ class ImagesGalleryFragment : Fragment() {
                     is ImagesGalleryViewModel.ViewState.Initialized -> renderInitializedState()
                     is ImagesGalleryViewModel.ViewState.Loading -> renderLoadingState()
                     is ImagesGalleryViewModel.ViewState.ImagesLoaded -> renderImages(state.thumbs)
-                    is ImagesGalleryViewModel.ViewState.ImageLoadError -> {}
+                    is ImagesGalleryViewModel.ViewState.ImageLoadError -> renderError(state.errorCode)
                 }
             }
         }
@@ -103,7 +105,6 @@ class ImagesGalleryFragment : Fragment() {
         mAdapter.onThumbClickListener = object : OnThumbClickListener{
             override fun onItemClick(thumb: ThumbItem) {
                 val action = ImagesGalleryFragmentDirections.actionFragmentImagesToFragmentPager(imageId = thumb.id)
-//                val extras: FragmentNavigator.Extras = FragmentNavigatorExtras(view to "${item.id}")
                 findNavController().navigate(action)
             }
         }
@@ -128,5 +129,13 @@ class ImagesGalleryFragment : Fragment() {
         tutorial.visibility =  View.VISIBLE
         emptyState.visibility = View.GONE
         mAdapter.updateList(data = emptyList())
+    }
+
+    private fun renderError(errorCode: Int){
+        tutorial.visibility =  View.GONE
+        emptyState.visibility = View.VISIBLE
+        mAdapter.updateList(data = emptyList())
+
+        Snackbar.make(activity?.findViewById(R.id.coordinator)!!, context.getErrorMessage(errorCode), Snackbar.LENGTH_LONG).show()
     }
 }

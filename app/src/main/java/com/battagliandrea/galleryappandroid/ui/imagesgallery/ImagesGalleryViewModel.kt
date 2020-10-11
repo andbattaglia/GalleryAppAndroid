@@ -2,6 +2,7 @@ package com.battagliandrea.galleryappandroid.ui.imagesgallery
 
 
 import androidx.lifecycle.*
+import com.battagliandrea.domain.exception.CustomException
 import com.battagliandrea.domain.interactions.ObserveImagesStream
 import com.battagliandrea.domain.interactions.SearchImages
 import com.battagliandrea.galleryappandroid.di.viewmodel.AssistedSavedStateViewModelFactory
@@ -40,9 +41,8 @@ open class ImagesGalleryViewModel @AssistedInject constructor(
                 observeImages().collect { images ->
                     _viewState.postValue(ViewState.ImagesLoaded(thumbs = images.toThumbsItems()))
                 }
-
-            } catch (e: java.lang.Exception){
-                _viewState.postValue(ViewState.ImageLoadError(errorType = 0))
+            } catch (e: CustomException){
+                _viewState.postValue(ViewState.ImageLoadError(errorCode = 0))
             }
         }
     }
@@ -56,8 +56,8 @@ open class ImagesGalleryViewModel @AssistedInject constructor(
                     delay(300);
                     _viewState.postValue(ViewState.Loading)
                     withContext(Dispatchers.Default) { searchImages(search = text, force = true) }
-                } catch (e: Exception){
-                    e.printStackTrace()
+                } catch (e: CustomException){
+                    _viewState.postValue(ViewState.ImageLoadError(errorCode = e.errorCode))
                 }
             }
         } else {
@@ -77,6 +77,6 @@ open class ImagesGalleryViewModel @AssistedInject constructor(
         object Initialized: ViewState()
         object Loading: ViewState()
         data class ImagesLoaded(val thumbs: List<BaseThumbItem>): ViewState()
-        data class ImageLoadError(val errorType: Int): ViewState()
+        data class ImageLoadError(val errorCode: Int): ViewState()
     }
 }
