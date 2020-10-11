@@ -3,13 +3,9 @@ package com.battagliandrea.galleryappandroid.ui.imagesgallery
 
 import androidx.lifecycle.*
 import com.battagliandrea.domain.exception.CustomException
-import com.battagliandrea.domain.interactions.ObserveImagesStream
-import com.battagliandrea.domain.interactions.RemoveBookmark
-import com.battagliandrea.domain.interactions.SaveBookmark
-import com.battagliandrea.domain.interactions.SearchImages
+import com.battagliandrea.domain.interactions.*
 import com.battagliandrea.galleryappandroid.di.viewmodel.AssistedSavedStateViewModelFactory
-import com.battagliandrea.galleryappandroid.ui.adapters.thumbs.model.BaseThumbItem
-import com.battagliandrea.galleryappandroid.ui.adapters.thumbs.model.toThumbsItems
+import com.battagliandrea.galleryappandroid.ui.adapters.thumbs.model.*
 import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
 import kotlinx.coroutines.*
@@ -17,10 +13,11 @@ import kotlinx.coroutines.flow.collect
 
 open class ImagesGalleryViewModel @AssistedInject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle,
-    private val searchImages: SearchImages,
-    private val observeImages: ObserveImagesStream,
+    private val getImagesUseCase: GetImages,
+    private val searchImagesUseCase: SearchImages,
     private val saveBookmarkUseCase: SaveBookmark,
-    private val removeBookmarkUseCase: RemoveBookmark
+    private val removeBookmarkUseCase: RemoveBookmark,
+    private val clearCache: ClearCache
 ) : ViewModel() {
 
     @AssistedInject.Factory
@@ -35,18 +32,20 @@ open class ImagesGalleryViewModel @AssistedInject constructor(
 
     init {
         _viewState.postValue(ViewState.Initialized)
-        observer()
     }
 
-    @ExperimentalCoroutinesApi
-    private fun observer(){
+
+    fun load(){
         viewModelScope.launch {
-            try {
-                observeImages().collect { images ->
+            try{
+                val images = withContext(Dispatchers.Default) { getImagesUseCase() }
+                if(images.isNotEmpty()){
                     _viewState.postValue(ViewState.ImagesLoaded(thumbs = images.toThumbsItems()))
+                } else {
+                    _viewState.postValue(ViewState.Initialized)
                 }
             } catch (e: CustomException){
-                _viewState.postValue(ViewState.ImageLoadError(errorCode = 0))
+                _viewState.postValue(ViewState.Initialized)
             }
         }
     }
@@ -59,30 +58,36 @@ open class ImagesGalleryViewModel @AssistedInject constructor(
                 try{
                     delay(300);
                     _viewState.postValue(ViewState.Loading)
-                    withContext(Dispatchers.Default) { searchImages(search = text, force = true) }
+                    val images = withContext(Dispatchers.Default) { searchImagesUseCase(search = text) }
+                    _viewState.postValue(ViewState.ImagesLoaded(thumbs = images.toThumbsItems()))
                 } catch (e: CustomException){
                     _viewState.postValue(ViewState.ImageLoadError(errorCode = e.errorCode))
                 }
             }
         } else {
+            viewModelScope.launch {
+                withContext(Dispatchers.Default) { clearCache()}
+            }
             _viewState.postValue(ViewState.Initialized)
         }
     }
 
-    fun saveBookmark(imageId: String){
+    fun saveBookmark(image: ThumbItem){
         viewModelScope.launch {
             try{
-                withContext(Dispatchers.Default) { saveBookmarkUseCase(imageId = imageId) }
+                val updatedImage = withContext(Dispatchers.Default) { saveBookmarkUseCase(image = image.toImage()) }
+                _viewState.postValue(ViewState.ChangeImageBookmark(thumb= updatedImage.toThumbItem()))
             } catch (e: CustomException){
                 _viewState.postValue(ViewState.ImageLoadError(errorCode = e.errorCode))
             }
         }
     }
 
-    fun removeBookmark(imageId: String){
+    fun removeBookmark(image: ThumbItem){
         viewModelScope.launch {
             try{
-                withContext(Dispatchers.Default) { removeBookmarkUseCase(imageId = imageId) }
+                val updatedImage = withContext(Dispatchers.Default) { removeBookmarkUseCase(image = image.toImage()) }
+                _viewState.postValue(ViewState.ChangeImageBookmark(thumb= updatedImage.toThumbItem()))
             } catch (e: CustomException){
                 _viewState.postValue(ViewState.ImageLoadError(errorCode = e.errorCode))
             }
@@ -102,5 +107,6 @@ open class ImagesGalleryViewModel @AssistedInject constructor(
         object Loading: ViewState()
         data class ImagesLoaded(val thumbs: List<BaseThumbItem>): ViewState()
         data class ImageLoadError(val errorCode: Int): ViewState()
+        data class ChangeImageBookmark(val thumb: BaseThumbItem): ViewState()
     }
 }

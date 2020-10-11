@@ -13,6 +13,7 @@ class ThumbItemVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun render(item: ThumbItem, listener: OnThumbClickListener? = null) = with(itemView) {
 
         tvTitle.text = item.title
+        btnBookmark.isSelected = item.isBookmarked
 
         Glide.with(this)
             .load(item.imageUrl)
@@ -25,6 +26,7 @@ class ThumbItemVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.setOnClickListener {
             listener?.onItemClick(item)
         }
+
 
         btnBookmark.setOnClickListener {
             btnBookmark.isSelected = !btnBookmark.isSelected

@@ -19,4 +19,9 @@
         app:spanCount="3"
         tools:listitem="@layout/view_thumb_item"/>
 
+    <include
+        android:id="@+id/emptyState"
+        android:visibility="gone"
+        layout="@layout/view_empty_state"/>
+
 </FrameLayout>

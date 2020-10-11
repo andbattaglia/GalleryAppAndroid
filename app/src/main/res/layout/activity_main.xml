@@ -14,14 +14,11 @@
 
         <include layout="@layout/view_toolbar"/>
 
-        <fragment
-            android:id="@+id/navHostFragment"
-            android:name="androidx.navigation.fragment.NavHostFragment"
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/navHostContainer"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            app:defaultNavHost="true"
-            app:navGraph="@navigation/nav_graph_gallery" />
+            android:layout_weight="1" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             style="@style/GalleryAppTheme.BottomNavigation"

@@ -16,7 +16,7 @@ import com.battagliandrea.galleryappandroid.ui.adapters.images.model.BaseImageIt
 import com.battagliandrea.galleryappandroid.ui.utils.MarginItemDecorator
 import com.battagliandrea.galleryappandroid.ui.utils.SliderTransformer
 import dagger.android.support.AndroidSupportInjection
-import kotlinx.android.synthetic.main.fragment_images.*
+import kotlinx.android.synthetic.main.fragment_gallery.*
 import kotlinx.android.synthetic.main.fragment_pager.*
 import javax.inject.Inject
 

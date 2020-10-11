@@ -12,22 +12,24 @@
     android:paddingEnd="@dimen/default_padding">
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivEmptyState"
         android:layout_width="250dp"
         android:layout_height="250dp"
-        android:src="@drawable/ic_empty_state"/>
+        tools:src="@drawable/ic_empty_state"/>
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvEmptyState"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/default_half_padding"
         android:paddingStart="@dimen/default_quarter_padding"
         android:paddingEnd="@dimen/default_quarter_padding"
         android:textAppearance="@style/TextPrimary.B2"
-        android:text="@string/search_empty_state"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"/>
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="@string/search_empty_state"/>
 
 </LinearLayout>

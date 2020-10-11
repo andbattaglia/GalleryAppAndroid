@@ -8,8 +8,8 @@ class SaveBookmark @Inject constructor(
         private val imageRepository: ImageRepository
 ){
 
-    suspend operator fun invoke(imageId: String): Image{
-        return imageRepository.setBookmark(imageId)
+    suspend operator fun invoke(image: Image): Image{
+        return imageRepository.setBookmark(image)
     }
 }
 

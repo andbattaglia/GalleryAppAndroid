@@ -2,13 +2,13 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph_gallery"
+    android:id="@+id/gallery"
     app:startDestination="@id/fragment_images">
 
     <fragment
         android:id="@+id/fragment_images"
         android:name="com.battagliandrea.galleryappandroid.ui.imagesgallery.ImagesGalleryFragment"
-        tools:layout="@layout/fragment_images">
+        tools:layout="@layout/fragment_gallery">
 
         <action
             android:id="@+id/action_fragment_images_to_fragment_pager"
@@ -33,12 +33,6 @@
         <argument
             android:name="imageId"
             app:argType="string" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/fragment_bookmarks"
-        android:name="com.battagliandrea.galleryappandroid.ui.bookmarks.BookmarksFragment"
-        tools:layout="@layout/fragment_bookmarks">
     </fragment>
 
 </navigation>

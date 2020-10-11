@@ -6,17 +6,11 @@ import kotlinx.coroutines.flow.Flow
 
 interface ImageRepository {
 
-    suspend fun observe(): Flow<List<Image>>
+    suspend fun get(force: Boolean, search: String = ""): List<Image>
 
-    suspend fun pull(search: String, force: Boolean)
+    suspend fun getBookmarks(): List<Image>
+    suspend fun setBookmark(image: Image) : Image
+    suspend fun removeBookmark(image: Image) : Image
 
-    suspend fun get() : List<Image>
-
-    suspend fun observeBookmarks(): Flow<List<Image>>
-
-    suspend fun pullBookmarks()
-
-    suspend fun setBookmark(id: String) : Image
-
-    suspend fun removeBookmark(id: String) : Image
+    fun clearCache()
 }

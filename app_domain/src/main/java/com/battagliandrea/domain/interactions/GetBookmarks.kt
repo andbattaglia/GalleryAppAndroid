@@ -4,12 +4,12 @@ import com.battagliandrea.domain.model.Image
 import com.battagliandrea.domain.repository.ImageRepository
 import javax.inject.Inject
 
-class RemoveBookmark @Inject constructor(
+class GetBookmarks @Inject constructor(
         private val imageRepository: ImageRepository
 ){
 
-    suspend operator fun invoke(image: Image): Image{
-        return imageRepository.removeBookmark(image)
+    suspend operator fun invoke(): List<Image>{
+        return imageRepository.getBookmarks()
     }
 }
 

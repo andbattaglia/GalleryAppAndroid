@@ -2,12 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/fragment_images"
+    <item android:id="@+id/gallery"
         android:title="@string/images"
         android:orderInCategory="1"
         android:icon="@drawable/ic_search_image"/>
 
-    <item android:id="@+id/fragment_bookmarks"
+    <item android:id="@+id/bookmarks"
         android:title="@string/bookmarks"
         android:orderInCategory="2"
         android:icon="@drawable/ic_bookmarks"/>

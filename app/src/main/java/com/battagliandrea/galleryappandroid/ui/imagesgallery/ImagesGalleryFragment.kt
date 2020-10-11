@@ -7,10 +7,11 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.SimpleItemAnimator
 import com.battagliandrea.galleryappandroid.R
 import com.battagliandrea.galleryappandroid.di.viewmodel.InjectingSavedStateViewModelFactory
 import com.battagliandrea.galleryappandroid.ext.getErrorMessage
@@ -23,10 +24,11 @@ import com.battagliandrea.galleryappandroid.ui.adapters.thumbs.view.OnThumbClick
 import com.battagliandrea.galleryappandroid.ui.utils.MarginItemDecorator
 import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.AndroidSupportInjection
-import kotlinx.android.synthetic.main.fragment_images.*
+import kotlinx.android.synthetic.main.fragment_gallery.*
+import kotlinx.android.synthetic.main.view_empty_state.*
 import kotlinx.android.synthetic.main.view_search_bar.*
-import org.w3c.dom.Text
 import javax.inject.Inject
+
 
 class ImagesGalleryFragment : Fragment() {
 
@@ -41,7 +43,7 @@ class ImagesGalleryFragment : Fragment() {
     lateinit var abstractFactory: InjectingSavedStateViewModelFactory
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_images, container, false)
+        return inflater.inflate(R.layout.fragment_gallery, container, false)
     }
 
     override fun onAttach(context: Context) {
@@ -60,17 +62,20 @@ class ImagesGalleryFragment : Fragment() {
                     is ImagesGalleryViewModel.ViewState.Loading -> renderLoadingState()
                     is ImagesGalleryViewModel.ViewState.ImagesLoaded -> renderImages(state.thumbs)
                     is ImagesGalleryViewModel.ViewState.ImageLoadError -> renderError(state.errorCode)
+                    is ImagesGalleryViewModel.ViewState.ChangeImageBookmark -> updateBookmark(state.thumb)
                 }
             }
         }
 
         setupList()
         setupSearch()
+        setupEmptyState()
     }
 
     override fun onResume() {
         super.onResume()
         etSearch.addTextChangedListener(textWatcher)
+        mGalleryViewModel.load()
     }
 
     override fun onPause() {
@@ -96,6 +101,11 @@ class ImagesGalleryFragment : Fragment() {
         recyclerView.adapter = mAdapter
         recyclerView.addItemDecoration(MarginItemDecorator(resources.getDimension(R.dimen.default_quarter_padding).toInt()))
 
+        val animator = recyclerView.itemAnimator
+        if (animator is SimpleItemAnimator) {
+            animator.supportsChangeAnimations = false
+        }
+
         val lm = recyclerView.layoutManager as GridLayoutManager
         lm.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
@@ -110,15 +120,19 @@ class ImagesGalleryFragment : Fragment() {
             }
 
             override fun onBookmarkClick(thumb: ThumbItem, isSelected: Boolean) {
-
-                Toast.makeText(context, "${isSelected}", Toast.LENGTH_SHORT).show()
-
                 if(isSelected){
-                    mGalleryViewModel.saveBookmark(thumb.id)
+                    mGalleryViewModel.saveBookmark(thumb)
                 } else {
-                    mGalleryViewModel.removeBookmark(thumb.id)
+                    mGalleryViewModel.removeBookmark(thumb)
                 }
             }
+        }
+    }
+
+    private fun setupEmptyState(){
+        context?.also {
+            ivEmptyState.setImageDrawable(ContextCompat.getDrawable(it, R.drawable.ic_empty_state))
+            tvEmptyState.text = it.getString(R.string.search_empty_state)
         }
     }
 
@@ -149,5 +163,9 @@ class ImagesGalleryFragment : Fragment() {
         mAdapter.updateList(data = emptyList())
 
         Snackbar.make(activity?.findViewById(R.id.coordinator)!!, context.getErrorMessage(errorCode), Snackbar.LENGTH_LONG).show()
+    }
+
+    private fun updateBookmark(image: BaseThumbItem){
+        mAdapter.updateBookmark(item = image)
     }
 }

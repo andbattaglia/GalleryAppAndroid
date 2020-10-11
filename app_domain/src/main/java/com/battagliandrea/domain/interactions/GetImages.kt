@@ -8,8 +8,8 @@ class GetImages @Inject constructor(
         private val imageRepository: ImageRepository
 ){
 
-    suspend operator fun invoke() : List<Image>{
-        return imageRepository.get()
+    suspend operator fun invoke(): List<Image>{
+        return imageRepository.get(force = false)
     }
 }
 

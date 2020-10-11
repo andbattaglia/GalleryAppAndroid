@@ -16,7 +16,7 @@ import kotlinx.coroutines.withContext
 
 open class ImagesPagerViewModel @AssistedInject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle,
-    private val getImages: GetImages
+    private val getImagesUseCase: GetImages
 ) : ViewModel() {
 
     @AssistedInject.Factory
@@ -36,7 +36,7 @@ open class ImagesPagerViewModel @AssistedInject constructor(
     private fun load(){
         viewModelScope.launch {
             try{
-                val images = withContext(Dispatchers.Default) { getImages() }
+                val images = withContext(Dispatchers.Default) { getImagesUseCase() }
                 _viewState.postValue(ViewState.ImagesLoaded(images = images.toImageItems(), position = images.getPositionById(id = imageId)))
             } catch (e: Exception){
                 e.printStackTrace()
@@ -52,7 +52,7 @@ open class ImagesPagerViewModel @AssistedInject constructor(
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //          VIEW STATE
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    sealed class ViewState() {
+    sealed class ViewState {
         object Initialized: ViewState()
         data class ImagesLoaded(val images: List<BaseImageItem>, val position: Int): ViewState()
         data class ImageLoadError(val errorType: Int): ViewState()

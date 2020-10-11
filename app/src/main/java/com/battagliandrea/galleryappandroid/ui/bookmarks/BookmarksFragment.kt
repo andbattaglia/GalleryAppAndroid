@@ -5,16 +5,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.battagliandrea.galleryappandroid.R
 import com.battagliandrea.galleryappandroid.di.viewmodel.InjectingSavedStateViewModelFactory
 import com.battagliandrea.galleryappandroid.ext.getViewModel
 import com.battagliandrea.galleryappandroid.ext.observe
 import com.battagliandrea.galleryappandroid.ui.adapters.thumbs.base.ThumbsAdapter
 import com.battagliandrea.galleryappandroid.ui.adapters.thumbs.model.BaseThumbItem
+import com.battagliandrea.galleryappandroid.ui.adapters.thumbs.model.ThumbItem
+import com.battagliandrea.galleryappandroid.ui.adapters.thumbs.view.OnThumbClickListener
+import com.battagliandrea.galleryappandroid.ui.imagesgallery.ImagesGalleryFragmentDirections
+import com.battagliandrea.galleryappandroid.ui.imagesgallery.ImagesGalleryViewModel
 import com.battagliandrea.galleryappandroid.ui.utils.MarginItemDecorator
 import dagger.android.support.AndroidSupportInjection
-import kotlinx.android.synthetic.main.fragment_images.*
+import kotlinx.android.synthetic.main.fragment_gallery.*
+import kotlinx.android.synthetic.main.view_empty_state.*
 import javax.inject.Inject
 
 class BookmarksFragment : Fragment() {
@@ -47,11 +54,18 @@ class BookmarksFragment : Fragment() {
                     is BookmarksViewModel.ViewState.Loading -> {}
                     is BookmarksViewModel.ViewState.BookmarksLoaded -> renderImages(state.thumbs)
                     is BookmarksViewModel.ViewState.BookmarkError -> {}
+                    is BookmarksViewModel.ViewState.ChangeImageBookmark -> updateBookmark(state.thumb)
                 }
             }
         }
 
         setupList()
+        setupEmptyState()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mViewModel.load()
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -60,14 +74,35 @@ class BookmarksFragment : Fragment() {
     private fun setupList(){
         recyclerView.adapter = mAdapter
         recyclerView.addItemDecoration(MarginItemDecorator(resources.getDimension(R.dimen.default_quarter_padding).toInt()))
+
+        mAdapter.onThumbClickListener = object : OnThumbClickListener {
+            override fun onItemClick(thumb: ThumbItem) {}
+
+            override fun onBookmarkClick(thumb: ThumbItem, isSelected: Boolean) {
+                if(!isSelected){
+                    mViewModel.removeBookmark(thumb)
+                }
+            }
+        }
+    }
+
+    private fun setupEmptyState(){
+        context?.also {
+            ivEmptyState.setImageDrawable(ContextCompat.getDrawable(it, R.drawable.ic_bookmarks_empty_state))
+            tvEmptyState.text = it.getString(R.string.bookmarks_tutorial)
+        }
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //          RENDER
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private fun renderImages(data: List<BaseThumbItem>){
-//        tutorial.visibility =  View.GONE
-//        emptyState.visibility =  if(data.isEmpty()) View.VISIBLE else View.GONE
+        emptyState.visibility =  if(data.isEmpty()) View.VISIBLE else View.GONE
         mAdapter.updateList(data = data)
+    }
+
+    private fun updateBookmark(image: BaseThumbItem){
+        mAdapter.removeItem(item = image)
+        emptyState.visibility =  if(mAdapter.isEmpty()) View.VISIBLE else View.GONE
     }
 }

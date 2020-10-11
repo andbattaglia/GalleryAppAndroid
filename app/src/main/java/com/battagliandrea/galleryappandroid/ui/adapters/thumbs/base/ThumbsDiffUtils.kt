@@ -25,6 +25,7 @@ class  ThumbsDiffUtils(
                 && newImage is ThumbItem
                 && oldImage.imageUrl == newImage.imageUrl
                 && oldImage.title == newImage.title
+                && oldImage.isBookmarked == newImage.isBookmarked
     }
 
     override fun getChangePayload(oldItemPosition: Int, newItemPosition: Int): Any? {

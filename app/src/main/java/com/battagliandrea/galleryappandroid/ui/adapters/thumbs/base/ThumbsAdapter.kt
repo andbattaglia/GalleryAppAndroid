@@ -85,6 +85,31 @@ open class ThumbsAdapter @Inject constructor() : RecyclerView.Adapter<RecyclerVi
         }
     }
 
+    fun updateBookmark(item: BaseThumbItem){
+        this.data.forEachIndexed { index, baseThumbItem ->
+            if(baseThumbItem.id == item.id && baseThumbItem is ThumbItem && item is ThumbItem){
+                baseThumbItem.isBookmarked = item.isBookmarked
+                notifyItemChanged(index)
+            }
+        }
+    }
+
+    fun removeItem(item: BaseThumbItem){
+        var position: Int = -1
+        this.data.forEachIndexed { index, baseThumbItem ->
+            if(baseThumbItem.id == item.id && baseThumbItem is ThumbItem && item is ThumbItem){
+                baseThumbItem.isBookmarked = item.isBookmarked
+                position = index
+            }
+        }
+
+        if(position >= 0 ){
+            this.data.removeAt(position)
+            notifyItemRemoved(position)
+        }
+
+    }
+
     fun showLoadingItem(){
         this.data.clear()
         this.data.add(0, LoadingThumbItem(id = UUID.randomUUID().hashCode().toString()))
@@ -96,5 +121,9 @@ open class ThumbsAdapter @Inject constructor() : RecyclerView.Adapter<RecyclerVi
             TYPE_LOADER -> 3
             else -> 1
         }
+    }
+
+    fun isEmpty(): Boolean {
+        return this.data.isEmpty()
     }
 }

@@ -3,12 +3,10 @@ package com.battagliandrea.galleryappandroid.ui.bookmarks
 
 import androidx.lifecycle.*
 import com.battagliandrea.domain.exception.CustomException
-import com.battagliandrea.domain.interactions.ObserveBookmarksStream
-import com.battagliandrea.domain.interactions.PullBookmark
+import com.battagliandrea.domain.interactions.GetBookmarks
 import com.battagliandrea.domain.interactions.RemoveBookmark
 import com.battagliandrea.galleryappandroid.di.viewmodel.AssistedSavedStateViewModelFactory
-import com.battagliandrea.galleryappandroid.ui.adapters.thumbs.model.BaseThumbItem
-import com.battagliandrea.galleryappandroid.ui.adapters.thumbs.model.toThumbsItems
+import com.battagliandrea.galleryappandroid.ui.adapters.thumbs.model.*
 import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
 import kotlinx.coroutines.*
@@ -16,9 +14,8 @@ import kotlinx.coroutines.flow.collect
 
 open class BookmarksViewModel @AssistedInject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle,
-    private val observeBookmarksStream: ObserveBookmarksStream,
-    private val pullBookmark: PullBookmark,
-    private val removeBookmark: RemoveBookmark
+    private val getBookmarksUseCase: GetBookmarks,
+    private val removeBookmarkUseCase: RemoveBookmark
 ) : ViewModel() {
 
     @AssistedInject.Factory
@@ -31,28 +28,25 @@ open class BookmarksViewModel @AssistedInject constructor(
 
     init {
         _viewState.postValue(ViewState.Initialized)
-        observer()
-        load()
-    }
-
-    @ExperimentalCoroutinesApi
-    private fun observer(){
-        viewModelScope.launch {
-            try {
-                observeBookmarksStream().collect { images ->
-                    _viewState.postValue(ViewState.BookmarksLoaded(thumbs = images.toThumbsItems()))
-                }
-            } catch (e: CustomException){
-                _viewState.postValue(ViewState.BookmarkError(errorCode = 0))
-            }
-        }
     }
 
     fun load(){
         viewModelScope.launch {
             try{
                 _viewState.postValue(ViewState.Loading)
-                withContext(Dispatchers.Default) { pullBookmark() }
+                val bookmarks = withContext(Dispatchers.Default) { getBookmarksUseCase() }
+                _viewState.postValue(ViewState.BookmarksLoaded(thumbs = bookmarks.toThumbsItems()))
+            } catch (e: CustomException){
+                _viewState.postValue(ViewState.BookmarkError(errorCode = e.errorCode))
+            }
+        }
+    }
+
+    fun removeBookmark(image: ThumbItem){
+        viewModelScope.launch {
+            try{
+                val updatedImage = withContext(Dispatchers.Default) { removeBookmarkUseCase(image = image.toImage()) }
+                _viewState.postValue(ViewState.ChangeImageBookmark(thumb= updatedImage.toThumbItem()))
             } catch (e: CustomException){
                 _viewState.postValue(ViewState.BookmarkError(errorCode = e.errorCode))
             }
@@ -72,5 +66,6 @@ open class BookmarksViewModel @AssistedInject constructor(
         object Loading: ViewState()
         data class BookmarksLoaded(val thumbs: List<BaseThumbItem>): ViewState()
         data class BookmarkError(val errorCode: Int): ViewState()
+        data class ChangeImageBookmark(val thumb: BaseThumbItem): ViewState()
     }
 }
