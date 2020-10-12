@@ -11,6 +11,7 @@ versions.androidArch = '2.0.0'
 versions.androidX = '1.1.0-beta01'
 versions.androidXConstraintLayout = '2.0.0-beta4'
 versions.androidXTest = '1.1.0'
+versions.androidXArch = '2.1.0'
 versions.androidXNavigation = "2.2.1"
 versions.androidXmultidex = '2.0.0'
 
@@ -49,6 +50,7 @@ kotlin.stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$versions.kotlin"
 kotlin.plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
 kotlin.coroutines_core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutines"
 kotlin.coroutines_android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutines"
+kotlin.coroutines_test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$versions.coroutines"
 kotlin.test = "org.jetbrains.kotlin:kotlin-test-junit:$versions.kotlin"
 deps.kotlin = kotlin
 
@@ -67,6 +69,10 @@ androidx.navigation_safe_args = "androidx.navigation:navigation-safe-args-gradle
 
 androidx.runner = "androidx.test:runner:$versions.androidXTest"
 androidx.rules ="androidx.test:rules:$versions.androidXTest"
+
+androidx.core_common = "androidx.arch.core:core-common:$versions.androidXArch"
+androidx.core_runtime = "androidx.arch.core:core-runtime:$versions.androidXArch"
+androidx.core_testing = "androidx.arch.core:core-testing:$versions.androidXArch"
 deps.androidx = androidx
 
 def support = [:]

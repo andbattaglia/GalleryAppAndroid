@@ -51,6 +51,10 @@ dependencies {
     testImplementation deps.test.junit
     testImplementation deps.test.kotlin
 
+    testImplementation deps.kotlin.coroutines_test
+
+    testImplementation deps.androidx.core_testing
+
     testImplementation deps.mockito.core
     testImplementation deps.mockito.inline
     testImplementation deps.mockito.kotlin

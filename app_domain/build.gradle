@@ -11,6 +11,12 @@ dependencies {
     implementation deps.support.java_inject
 
     api deps.support.java_inject
+
+    testImplementation deps.test.junit
+    testImplementation deps.test.kotlin
+    testImplementation deps.mockito.core
+    testImplementation deps.mockito.inline
+    testImplementation deps.mockito.kotlin
 }
 
 sourceCompatibility = "8"

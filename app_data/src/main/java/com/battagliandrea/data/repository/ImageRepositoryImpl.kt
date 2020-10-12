@@ -4,11 +4,6 @@ import com.battagliandrea.data.database.RoomDataSource
 import com.battagliandrea.data.networking.RedditApiDataSource
 import com.battagliandrea.domain.model.Image
 import com.battagliandrea.domain.repository.ImageRepository
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.channels.BroadcastChannel
-import kotlinx.coroutines.channels.ConflatedBroadcastChannel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.asFlow
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -66,7 +61,6 @@ open class ImageRepositoryImpl @Inject constructor(
                 return image
         }
 
-        @ExperimentalCoroutinesApi
         override suspend fun removeBookmark(image: Image): Image {
                 image.isBookmarked = false
 

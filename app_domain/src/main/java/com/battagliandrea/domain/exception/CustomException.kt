@@ -8,7 +8,7 @@ package com.battagliandrea.domain.exception
  *  2 --> no internet connection
  *  3--> database error
  */
-class CustomException : Exception {
+class CustomException : RuntimeException {
 
     var errorCode: Int = 0
 
